@@ -203,6 +203,8 @@ function loadSlideImage(slide, src) {
   img.src = src;
 }
 
+
+
 document
   .querySelectorAll(".slide")
   .forEach((slide, i) => loadSlideImage(slide, slideImages[i]));
@@ -396,7 +398,7 @@ function handleSubmit(e) {
   const consent = form.querySelector("#f-consent").checked;
 
   if (!adSoyad || !telefon || !hizmet || !mesaj) {
-    setFormMessage("Lütfen tüm zorunlu alanları doldurun.", "error");
+    setFormMessage("Lütfen tüm zorunlu alanları doldurunuz.", "error");
     return;
   }
 
