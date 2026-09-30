@@ -203,8 +203,6 @@ function loadSlideImage(slide, src) {
   img.src = src;
 }
 
-
-
 document
   .querySelectorAll(".slide")
   .forEach((slide, i) => loadSlideImage(slide, slideImages[i]));
