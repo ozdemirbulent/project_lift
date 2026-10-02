@@ -17,7 +17,74 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* ═══ PRELOADER ═══ */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 20000; /* sitedeki en yüksek z-index 10005, loader hepsinin üstünde olmalı */
+  display: grid;
+  place-items: center;
+  background: var(--dark);
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease;
+}
+.loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
 
+.loader-inner {
+  position: relative;
+  width: min(300px, 70vw);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+/* Logo dönmüyor (yazılar ters dönmesin), nefes alır gibi atıyor */
+.loader-logo {
+  width: 78%;
+  height: auto;
+  -webkit-mask-image: radial-gradient(circle, #000 55%, transparent 72%);
+  mask-image: radial-gradient(circle, #000 55%, transparent 72%);
+  animation: loader-breathe 1.8s ease-in-out infinite;
+}
+
+/* Logonun etrafında dönen altın halka */
+.loader-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--gold);
+  border-right-color: rgba(201, 168, 76, 0.35);
+  animation: loader-spin 1.4s linear infinite;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader-breathe {
+  0%,
+  100% {
+    transform: scale(0.95);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-logo,
+  .loader-ring {
+    animation-duration: 4s;
+  }
+}
 html {
   scroll-behavior: smooth;
 }

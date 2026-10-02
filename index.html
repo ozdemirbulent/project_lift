@@ -28,6 +28,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <link rel="preload" as="image" href="images/logo.png" />
     <meta name="geo.region" content="TR-27" />
     <meta name="geo.placename" content="Gaziantep, Türkiye" />
     <meta name="geo.position" content="37.013958;37.330251" />
@@ -255,6 +256,19 @@
   </head>
   <body>
     <!-- ═══ ÇEREZ AÇILIŞ KART & SABİT BUTON ═══ -->
+
+    <div class="loader" id="loader" role="status" aria-label="Sayfa yükleniyor">
+      <div class="loader-inner">
+        <div class="loader-ring"></div>
+        <img
+          class="loader-logo"
+          src="images/logo.png"
+          alt="27 İstanbul Asansör"
+          width="300"
+          height="300"
+        />
+      </div>
+    </div>
     <div
       id="cookieBox"
       class="cookie-box"
@@ -744,7 +758,8 @@
         </details>
         <details class="faq-item" name="faq">
           <summary>
-            Eski asansörüm modernize edilir mi, yoksa yenisini mi kurmak gerekiyor?
+            Eski asansörüm modernize edilir mi, yoksa yenisini mi kurmak
+            gerekiyor?
           </summary>
           <p class="sss_text">
             Bu, asansörün mevcut durumuna bağlıdır. Kabin ve kuyu sağlamsa

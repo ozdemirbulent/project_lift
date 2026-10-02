@@ -13,7 +13,40 @@
       return null;
     }
   }
+  /* ── 0. PRELOADER ───────────────────────────────────────────*/
+  (function () {
+    const loader = document.getElementById("loader");
+    if (!loader) return;
 
+    const MIN_TIME = 1500; // sayfa açıldıktan sonra logo en az bu kadar (ms) görünsün
+    const MAX_TIME = 6000; // yavaş internette bile en fazla bu kadar beklesin
+    let closed = false;
+
+    document.body.style.overflow = "hidden"; // loader varken sayfa kaymasın
+
+    function hideLoader() {
+      if (closed) return;
+      closed = true;
+      loader.classList.add("is-hidden");
+      document.body.style.overflow = "";
+    }
+
+    function onLoaded() {
+      // performance.now() = sayfanın açılışından beri geçen süre
+      const wait = Math.max(0, MIN_TIME - performance.now());
+      setTimeout(hideLoader, wait);
+    }
+
+    if (document.readyState === "complete") onLoaded();
+    else window.addEventListener("load", onLoaded);
+
+    setTimeout(hideLoader, MAX_TIME); // güvenlik: bir kaynak takılırsa loader sonsuza kadar kalmasın
+
+    // Görünmez olunca DOM'dan sil, altındaki sayfaya tıklamayı engellemesin
+    loader.addEventListener("transitionend", (e) => {
+      if (e.propertyName === "opacity") loader.remove();
+    });
+  })();
   const cookieBox = document.getElementById("cookieBox");
   const cookieAcceptBtn = document.getElementById("cookieAcceptBtn");
   const cookieRejectBtn = document.getElementById("cookieRejectBtn");
