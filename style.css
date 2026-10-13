@@ -2001,3 +2001,318 @@ footer {
     transition: none;
   }
 }
+
+/* ═══ İLETİŞİM — KART YAPISI & İMLEÇ HOVER ═══ */
+
+/* Sol taraf: her bilgi satırı hover'da canlanan bir kart */
+.contact-info {
+  font-style: normal;
+}
+
+.contact-item {
+  position: relative;
+  overflow: hidden;
+  gap: 16px;
+  margin-bottom: 0;
+  padding: 22px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: transparent;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.contact-item:last-of-type {
+  border-bottom: 1px solid transparent;
+  margin-bottom: 0;
+}
+
+/* kart hover'a kadar görünmez; aradaki sade ayırıcı çizgi eskisi gibi kalır */
+.contact-item::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 0;
+  height: 1px;
+  background: #222;
+  transition: opacity 0.3s ease;
+}
+
+.contact-item:last-of-type::after {
+  display: none;
+}
+
+.contact-item:hover::after {
+  opacity: 0;
+}
+
+.contact-item > * {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-item:hover {
+  transform: translateX(8px);
+  border-color: rgba(201, 168, 76, 0.5);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+}
+
+.contact-icon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  border-radius: 14px;
+  background: rgba(201, 168, 76, 0.09);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.contact-item:hover .contact-icon {
+  background: var(--gold);
+  transform: scale(1.08) rotate(-6deg);
+  box-shadow: 0 8px 22px rgba(201, 168, 76, 0.35);
+}
+
+.contact-detail label {
+  transition: color 0.3s ease;
+}
+
+.contact-item:hover .contact-detail label {
+  color: var(--gold-light);
+}
+
+.contact-detail p {
+  transition: color 0.3s ease;
+}
+
+.contact-item:hover .contact-detail p {
+  color: var(--white);
+}
+
+.contact-detail a {
+  transition: color 0.25s ease;
+}
+
+.contact-detail a:hover {
+  color: var(--gold-light) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+}
+
+/* Sağ taraf: form kart */
+.contact-form {
+  position: relative;
+  overflow: hidden;
+  background: #131313;
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: 22px;
+  padding: 34px 32px 30px;
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+}
+
+/* üstte altın vurgu çizgisi */
+.contact-form::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    var(--gold-light),
+    var(--gold),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.contact-form > * {
+  position: relative;
+  z-index: 1;
+}
+
+.form-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.form-card-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  border-radius: 14px;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+}
+
+.form-card-head h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.form-card-head p {
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+/* Kartın içinde alan rengi = kart rengi (yüzen etiket temiz otursun) */
+.contact-form .form-group input,
+.contact-form .form-group textarea,
+.contact-form .form-group select {
+  background: #131313;
+  border: 1.5px solid #2f2f2f;
+  border-radius: 12px;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.contact-form .form-group input:hover,
+.contact-form .form-group textarea:hover,
+.contact-form .form-group select:hover {
+  border-color: #4a4a4a;
+}
+
+.contact-form .form-group input:focus,
+.contact-form .form-group textarea:focus,
+.contact-form .form-group select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.14);
+}
+
+.contact-form .form-group input:focus ~ .floatingLabel,
+.contact-form .form-group input:not(:placeholder-shown) ~ .floatingLabel,
+.contact-form .form-group textarea:focus ~ .floatingLabel,
+.contact-form .form-group textarea:not(:placeholder-shown) ~ .floatingLabel {
+  background-color: #131313;
+}
+
+.contact-form .form-group select {
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23c9a84c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+.contact-form .form-group select option {
+  background: #131313;
+  color: var(--white);
+}
+
+/* seçim yapılmadan hata rengi gösterme */
+.contact-form .form-group select:invalid {
+  border-color: #2f2f2f;
+}
+.contact-form .form-group select:user-invalid {
+  border-color: #a14242;
+}
+
+.contact-form .form-group > label:not(.floatingLabel) {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.78rem;
+  color: var(--gray);
+}
+
+/* Gönder butonu: kartı doldurur, hover'da parlama geçer */
+.contact-form .btn-submit {
+  position: relative;
+  overflow: hidden;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 24px;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(201, 168, 76, 0.22);
+}
+
+.contact-form .btn-submit::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 40%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.contact-form .btn-submit:hover::after {
+  left: 130%;
+}
+
+/* Form kartı başlığa biraz daha yakın dursun (yalnızca iki sütunlu görünümde) */
+@media (min-width: 901px) {
+  .contact-form {
+    margin-top: -28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .contact-form {
+    padding: 28px 22px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-item {
+    padding: 20px 18px;
+    margin-bottom: 0;
+  }
+
+  .contact-item::after {
+    left: 18px;
+    right: 18px;
+  }
+
+  .contact-item:hover {
+    transform: none;
+  }
+
+  .form-card-head p {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-item,
+  .contact-icon,
+  .contact-form .btn-submit::after {
+    transition: none;
+  }
+}

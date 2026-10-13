@@ -1,4 +1,14 @@
 (function () {
+  const kvkkUpdateYear = document.getElementById("kvkkUpdateYear");
+  if (kvkkUpdateYear) {
+    kvkkUpdateYear.textContent = new Date().getFullYear();
+  }
+
+  const footerYear = document.getElementById("footerYear");
+  if (footerYear) {
+    footerYear.textContent = new Date().getFullYear();
+  }
+
   const LS_KEY = "cookie_consent_v1";
 
   function saveConsent(val) {
