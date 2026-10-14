@@ -231,6 +231,8 @@ const slideImages = [
   "./images/hero-1.webp",
   "./images/hero-2.webp",
   "./images/hero-3.webp",
+  "./images/elevator.jpg",
+  "./images/resim.jpg",
 ];
 
 function loadSlideImage(slide, src) {
