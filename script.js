@@ -238,9 +238,10 @@ const slideImages = [
 function loadSlideImage(slide, src) {
   const img = new Image();
   img.onload = () => {
+    // Sadece görseli ver; boyut/konum CSS'ten yönetilir (mobilde ayarlanabilsin diye)
     slide.style.backgroundImage = `url('${src}')`;
-    slide.style.backgroundSize = "cover";
-    slide.style.backgroundPosition = "center";
+    // Mobilde görselin TAMAMI gösterilsin diye CSS değişkeni de veriyoruz
+    slide.style.setProperty("--slide-img", `url('${src}')`);
   };
   img.onerror = () => {
     slide.style.background = "linear-gradient(135deg, #111 0%, #1a1a1a 100%)";

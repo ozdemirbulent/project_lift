@@ -324,6 +324,7 @@ nav.scrolled {
 .hero {
   position: relative;
   height: 100vh;
+  height: 100svh; /* mobil tarayıcı adres çubuğuna göre doğru yükseklik */
   min-height: 500px;
   overflow: hidden;
 }
@@ -339,7 +340,8 @@ nav.scrolled {
   opacity: 0;
   transition: opacity 1.5s ease;
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-position: var(--slide-pos, center center);
 }
 
 .slide.active {
@@ -2381,5 +2383,89 @@ footer {
   .contact-icon,
   .contact-form .btn-submit::after {
     transition: none;
+  }
+}
+
+/* ═══ HERO SLIDER — MOBİL ═══
+   Eski tasarım korunur: tam ekran hero, görsel ARKA PLANDA kayar,
+   yazılar + butonlar görselin üstünde altta durur.
+   Fark: görsel artık kırpılmaz (tamamı görünür) ve arka plana yumuşakça karışır. */
+html {
+  overflow-x: hidden;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    /* Görselin kapladığı alan. Büyütmek için 85vw / 52svh, küçültmek için 70vw yap */
+    --slide-h: min(80vw, 50svh);
+    --nav-h: 80px;
+
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    /* yazı, görselin alt kısmına binsin (üst üste gelsin) ama taşmasın */
+    padding: calc(var(--nav-h) + var(--slide-h) * 0.72) var(--section-px) 90px;
+  }
+
+  .hero-content {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 100%;
+    z-index: 5;
+  }
+
+  /* Cover'ı kapat; görsel aşağıdaki iki katmanla gösterilir */
+  .slide {
+    background-image: none !important;
+    background-color: #0f0f0f;
+  }
+
+  /* Arka katman: aynı görselin bulanık hali tüm hero'yu doldurur */
+  .slide::before {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    background-image: var(--slide-img);
+    background-size: cover;
+    background-position: center;
+    filter: blur(22px) brightness(0.38);
+  }
+
+  /* Ön katman: görselin TAMAMI. Kenarları maskeyle eriyip arka plana karışır */
+  .slide::after {
+    content: "";
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    height: var(--slide-h);
+    background-color: transparent;
+    background-image: var(--slide-img);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 72%, transparent 100%);
+  }
+
+  /* Eski karartma: yazının okunması için aşağı doğru koyulaşır */
+  .slides::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0) 0%,
+      rgba(10, 10, 10, 0.05) 30%,
+      rgba(10, 10, 10, 0.7) 55%,
+      rgba(10, 10, 10, 0.95) 100%
+    );
   }
 }
